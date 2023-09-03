@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Worker</title>
+    <style>
+        .add-worker-form {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        .add-worker-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .add-worker-form input[type="text"],
+        .add-worker-form input[type="date"],
+        .add-worker-form input[type="email"],
+        .add-worker-form select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .add-worker-form .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-worker-form .button:hover {
+            background-color: #4CAF50;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        a.button:hover {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Add New Worker</h1>
+
+<!-- Form for adding a new employee -->
+<form th:action="@{/cafeteria/add}" th:object="${worker}" method="post" class="add-worker-form">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" th:field="*{firstName}" required><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" th:field="*{lastName}" required><br>
+
+    <label for="birthDate">Birth Date:</label>
+    <input type="date" id="birthDate" name="birthDate" th:field="*{birthDate}" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" th:field="*{email}" required><br>
+
+    <label for="role">Role:</label>
+    <select id="role" name="role.id" th:field="*{role.id}" required>
+        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.roleName}"></option>
+    </select><br>
+
+    <input type="submit" class="button" value="Add Worker">
+</form>
+
+<br>
+<br>
+
+<!-- Link to return to the list of workers -->
+<a class="button" href="/cafeteria/workers">Back to Workers List</a>
+
+</body>
+</html>

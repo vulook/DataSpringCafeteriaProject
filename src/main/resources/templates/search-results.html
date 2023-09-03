@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        table td, table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a.button:hover {
+            background-color: #4CAF50;
+        }
+
+        .message {
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Search Results</h1>
+
+<!-- Checking if there are search results -->
+<th:block th:if="${workers != null and workers.size() > 0}">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Age</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+
+        <!-- Output of search results -->
+        <tr th:each="worker : ${workers}">
+            <td th:text="${worker.id}"></td>
+            <td th:text="${worker.firstName + ' ' + worker.lastName}"></td>
+            <td th:text="${worker.age}"></td>
+            <td th:text="${worker.role.roleName}"></td>
+            <td>
+                <a th:href="@{'/cafeteria/workers/' + ${worker.id}}">Details</a>
+                <a th:href="@{'/cafeteria/workers/' + ${worker.id} + '/edit'}">Edit</a>
+                <a th:href="@{'/cafeteria/workers/' + ${worker.id} + '/delete'}"
+                   onclick="return confirm('Are you sure you want to delete this worker?')">Delete</a>
+            </td>
+        </tr>
+    </table>
+</th:block>
+
+
+<br>
+<br>
+
+<!-- Message about no search results -->
+<th:block th:if="${workers == null or workers.size() == 0}">
+    <p class="message">No workers found!</p>
+</th:block>
+
+<br>
+<br>
+
+<!-- Link to return to the list of workers -->
+<a class="button" href="/cafeteria/workers">Back to Workers List</a>
+
+</body>
+</html>

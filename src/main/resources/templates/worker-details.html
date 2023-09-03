@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Worker Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        table td, table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        a.button:hover {
+            background-color: #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Worker Details</h1>
+
+<table>
+    <tr>
+        <td>First Name:</td>
+        <td th:text="${worker.firstName}"></td>
+    </tr>
+    <tr>
+        <td>Last Name:</td>
+        <td th:text="${worker.lastName}"></td>
+    </tr>
+    <tr>
+        <td>Birth Date:</td>
+        <td th:text="${#temporals.format(worker.birthDate, 'dd-MM-yyyy')}"></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td th:text="${worker.email}"></td>
+    </tr>
+    <tr>
+        <td>Role:</td>
+        <td th:text="${worker.role.roleName}"></td>
+    </tr>
+</table>
+
+<br>
+<br>
+
+<!-- Link to return to the list of workers -->
+<a class="button" href="/cafeteria/workers">Back to Workers List</a>
+
+</body>
+</html>
