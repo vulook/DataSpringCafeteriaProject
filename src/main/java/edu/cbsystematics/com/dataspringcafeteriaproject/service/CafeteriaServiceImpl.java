@@ -4,9 +4,12 @@ import edu.cbsystematics.com.dataspringcafeteriaproject.models.Role;
 import edu.cbsystematics.com.dataspringcafeteriaproject.models.Worker;
 import edu.cbsystematics.com.dataspringcafeteriaproject.repository.RoleRepository;
 import edu.cbsystematics.com.dataspringcafeteriaproject.repository.WorkerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +60,12 @@ public class CafeteriaServiceImpl implements CafeteriaService {
             }
             workerRepository.deleteById(id);
         }
+    }
+
+    @Override
+    @Transactional
+    public void updateWorkerInfo(Long id, String firstName, String lastName, String email, LocalDate birthDate, Role role) {
+        workerRepository.updateWorkerInfo(id, firstName, lastName, email, birthDate, role);
     }
 
     @Override

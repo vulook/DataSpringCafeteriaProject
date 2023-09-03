@@ -65,17 +65,7 @@ public class WorkerController {
 
     @PostMapping("/workers/{id}/edit")
     public String editWorker(@PathVariable Long id, @ModelAttribute("worker") Worker worker) {
-        Worker existingWorker = cafeteriaService.getWorkerById(id).orElse(null);
-        if (existingWorker != null) {
-            existingWorker.setFirstName(worker.getFirstName());
-            existingWorker.setLastName(worker.getLastName());
-            existingWorker.setBirthDate(worker.getBirthDate());
-            existingWorker.setEmail(worker.getEmail());
-            existingWorker.setRole(worker.getRole());
-
-            // Save the updated Worker
-            cafeteriaService.saveWorker(existingWorker);
-        }
+        cafeteriaService.updateWorkerInfo(id, worker.getFirstName(), worker.getLastName(), worker.getEmail(), worker.getBirthDate(), worker.getRole());
         return "redirect:/cafeteria/workers";
     }
 

@@ -4,6 +4,7 @@ import edu.cbsystematics.com.dataspringcafeteriaproject.models.Role;
 import edu.cbsystematics.com.dataspringcafeteriaproject.models.Worker;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,9 @@ public interface CafeteriaService {
 
     // Delete a worker by ID
     void deleteWorker(Long id);
+
+    // Update Worker Information
+    void updateWorkerInfo(Long id, String firstName, String lastName, String email, LocalDate birthDate, Role role);
 
     // Search for workers by first name and last name
     List<Worker> searchByFullName(String fullName);

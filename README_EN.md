@@ -43,11 +43,11 @@ spring:
 
 ***Get List of Roles:*** Ability to view a list of all available roles.
 
-***View Worker Details:*** Ability to view details of a specific worker, including name, surname, age, role, and more.
+***View Worker Details:*** Ability to view details of a specific worker, including name, surname, age, role.
 
 ***Add New Worker:*** Ability to add a new worker with all the necessary details.
 
-***Edit Worker:*** Ability to edit information about an existing worker, including name, surname, age, role, and more.
+***Edit Worker:*** Ability to edit information about an existing worker, including name, surname, age, role.
 
 ***Delete Worker:*** Ability to remove a worker from the system.
 
