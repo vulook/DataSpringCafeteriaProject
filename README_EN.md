@@ -59,16 +59,33 @@ spring:
 
 ***repository:*** Package where repositories for working with the database are located, such as WorkerRepository and RoleRepository.
 
-In the WorkerRepository, there is a method created to search for workers by first name or last name.
+In the WorkerRepository, a method has been created to perform a search for workers by their first name or last name.
 
 ```java
-
 @Query("SELECT w FROM Worker w WHERE lower(w.firstName) LIKE lower(concat('%', :query, '%')) OR lower(w.lastName) LIKE lower(concat('%', :query, '%'))")
 List<Worker> searchByNameOrLastName(@Param("query") String query);
 
 ```
 
-This method uses the @Query annotation, which allows you to define your custom SQL query for execution. The method uses a custom SQL query to search for workers by first name or last name. It takes a query parameter representing the search string and returns a list of workers whose names or last names contain a portion of this string (case-insensitive). This allows users to search by part of the worker's name or last name.
+This method uses the @Query annotation, which allows defining a custom SQL query for execution. The method uses a custom SQL query to search for workers by their first name or last name. 
+It takes a parameter, query, which represents the search string, and returns a list of workers whose first names or last names contain a part of this string (ignoring case). This allows users to search for a worker by a part of their name or last name.
+
+Additionally, a custom method updateWorkerInfo has been created to edit worker information:
+
+```java
+    @Modifying
+    @Transactional
+    @Query("UPDATE Worker w SET w.firstName = :firstName, w.lastName = :lastName, w.email = :email, w.birthDate = :birthDate, w.role = :role WHERE w.id = :id")
+    void updateWorkerInfo(
+            @Param("id") Long id,
+            @Param("firstName") String firstName,
+            @Param("lastName") String lastName,
+            @Param("email") String email,
+            @Param("birthDate") LocalDate birthDate,
+            @Param("role") Role role
+    );
+
+```
 
 ***service:*** Package where services for the application logic are located, such as CafeteriaService.
 
