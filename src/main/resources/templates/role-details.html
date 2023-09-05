@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Role Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        table td, table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a.button:hover {
+            background-color: #4CAF50;
+        }
+
+        .message {
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<h1>Role Details</h1>
+
+<!-- Check if a role is present -->
+<th:block th:if="${role != null}">
+
+    <table>
+        <tr>
+            <th>Role name</th>
+            <th>Description</th>
+        </tr>
+        <!-- Output of search results -->
+        <tr>
+            <td><strong>Role Name:</strong></td>
+            <td><span th:text="${role.roleName}"></span></td>
+        </tr>
+        <tr>
+            <td><strong>Description:</strong></td>
+            <td><span th:text="${role.description}"></span></td>
+        </tr>
+        <tr>
+            <td><strong>Worker count:</strong></td>
+            <td><a th:href="@{'/cafeteria/workers-by-role?roleId=' + ${role.id}}"><span th:text="${roleCount}"></span></a></td>
+        </tr>
+    </table>
+
+</th:block>
+
+<!-- No role details found -->
+<th:block th:if="${role == null}">
+    <p class="message">No role details found!</p>
+</th:block>
+
+<br>
+<br>
+
+<!-- Link to return to the list of workers -->
+<a class="button" href="/cafeteria/workers">Back to Workers List</a>
+
+</body>
+</html>

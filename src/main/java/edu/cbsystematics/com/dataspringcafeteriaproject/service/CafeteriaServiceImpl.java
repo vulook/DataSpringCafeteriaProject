@@ -4,7 +4,6 @@ import edu.cbsystematics.com.dataspringcafeteriaproject.models.Role;
 import edu.cbsystematics.com.dataspringcafeteriaproject.models.Worker;
 import edu.cbsystematics.com.dataspringcafeteriaproject.repository.RoleRepository;
 import edu.cbsystematics.com.dataspringcafeteriaproject.repository.WorkerRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +35,11 @@ public class CafeteriaServiceImpl implements CafeteriaService {
     }
 
     @Override
+    public Optional<Role> findRoleByName(String roleName) {
+        return roleRepository.findRoleByName(roleName);
+    }
+
+    @Override
     public Optional<Worker> getWorkerById(Long id) {
         return workerRepository.findById(id);
     }
@@ -48,6 +52,16 @@ public class CafeteriaServiceImpl implements CafeteriaService {
     @Override
     public void saveRole(Role role) {
         roleRepository.save(role);
+    }
+
+    @Override
+    public int countWorkersByRole(String roleName) {
+        return roleRepository.countWorkersByRoleName(roleName);
+    }
+
+    @Override
+    public List<Worker> getWorkersByRoleId(Long roleId) {
+        return workerRepository.findAllByRoleId(roleId);
     }
 
     @Override

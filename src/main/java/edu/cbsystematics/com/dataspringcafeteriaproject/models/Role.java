@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,11 +19,18 @@ public class Role {
     @Column(name = "id", nullable = false, columnDefinition = "smallint(3)")
     private Long id;
 
-    @Column(name = "last_name", nullable = false, columnDefinition = "varchar(15)")
+    @Column(name = "role_name", nullable = false, columnDefinition = "varchar(15)")
     private String roleName;
 
-    public Role(String roleName) {
+    @Column(name = "description", nullable = false, columnDefinition = "varchar(200)")
+    private String description;
+
+    @OneToMany(mappedBy = "role")
+    private List<Worker> workers;
+
+    public Role(String roleName, String description) {
         this.roleName = roleName;
+        this.description = description;
     }
 
 }

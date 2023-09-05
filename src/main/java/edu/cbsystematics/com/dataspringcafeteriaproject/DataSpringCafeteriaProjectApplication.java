@@ -28,9 +28,9 @@ public class DataSpringCafeteriaProjectApplication {
     public void createAndSaveWorkers() {
 
         // Creating and Saving the roles in the database
-        Role directorRole = new Role("Director");
-        Role accountantRole = new Role("Accountant");
-        Role baristaRole = new Role("Barista");
+        Role directorRole = new Role("Director", "manage the cafeteria");
+        Role accountantRole = new Role("Accountant", "count money");
+        Role baristaRole = new Role("Barista", "make coffee");
 
         cafeteriaService.saveRole(directorRole);
         cafeteriaService.saveRole(accountantRole);

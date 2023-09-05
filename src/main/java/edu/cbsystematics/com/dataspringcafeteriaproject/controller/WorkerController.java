@@ -29,6 +29,42 @@ public class WorkerController {
         return "workers";
     }
 
+    @GetMapping("/search-role")
+    public String showSearchFormRole() {
+        return "role-form";
+    }
+
+    @GetMapping("/role-details")
+    public String getRoleByName(@RequestParam String role, Model model) {
+        Optional<Role> roleOptional = cafeteriaService.findRoleByName(role);
+        if (roleOptional.isPresent()) {
+            // Role found
+            Role foundRole = roleOptional.get();
+            model.addAttribute("role", foundRole);
+
+            // Count workers for the found role
+            int roleCount = cafeteriaService.countWorkersByRole(foundRole.getRoleName());
+            model.addAttribute("roleCount", roleCount);
+
+            // Get the role ID
+            Long roleId = foundRole.getId();
+            model.addAttribute("roleId", roleId);
+
+        } else {
+            // Role not found
+            model.addAttribute("errorMessage", "Role " + role + " not found.");
+        }
+
+        return "role-details";
+    }
+
+    @GetMapping("/workers-by-role")
+    public String searchWorkersByRole(@RequestParam(name = "roleId") Long roleId, Model model) {
+        List<Worker> workers = cafeteriaService.getWorkersByRoleId(roleId);
+        model.addAttribute("workers", workers);
+        return "search-results";
+    }
+
     @GetMapping("/add")
     public String showAddWorkerForm(Model model) {
         Worker worker = new Worker();
@@ -75,8 +111,8 @@ public class WorkerController {
         return "redirect:/cafeteria/workers";
     }
 
-    @GetMapping("/search")
-    public String showSearchForm() {
+    @GetMapping("/search-worker")
+    public String showSearchFormWorker() {
         return "search-form";
     }
 

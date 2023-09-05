@@ -31,4 +31,9 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
     // Search by FirstName Or/And LastName
     @Query("SELECT w FROM Worker w WHERE lower(w.firstName) LIKE lower(concat('%', :query, '%')) OR lower(w.lastName) LIKE lower(concat('%', :query, '%'))")
     List<Worker> searchByNameOrLastName(@Param("query") String query);
+
+
+    // Get workers by Role ID
+    List<Worker> findAllByRoleId(Long roleId);
+
 }
